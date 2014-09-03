@@ -4,6 +4,13 @@ module PiwikAnalytics
       config = PiwikAnalytics.configuration
       return if config.disabled?
 
+      if config.trackingTimer?
+        trackingTimer = <<-CODE
+        _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
+        _paq.push(['trackPageView']);
+        CODE
+      end
+
       if config.use_async?
         tag = <<-CODE
         <!-- Piwik -->
@@ -14,6 +21,7 @@ module PiwikAnalytics
             _paq.push(['setSiteId', #{config.id_site}]);
             _paq.push(['setTrackerUrl', u+'piwik.php']);
             _paq.push(['trackPageView']);
+            #{trackingTimer}
             var d=document,
                 g=d.createElement('script'),
                 s=d.getElementsByTagName('script')[0];
