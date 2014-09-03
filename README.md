@@ -1,18 +1,19 @@
-= PiwikAnalytics
+# PiwikAnalytics
 
-**Note:** This Gem has undergone a major rewrite in 1.x compared to 0.9.x.
+**Note:** Original Gem from Fabian Becker. 
+This is a fork of piwik_analytics version 1.0.2, because the missing Rails 4+ support.
 
 The piwik_analytics gem provides an easy way to include Piwik into your application.
 By default it will output the synchronous piwik tracking code for every page
 (given that it is configured correctly).
 
-== Installation
+## Installation
 
 Add `piwik_analytics` to Gemfile:
 
-    gem 'piwik_analytics', '~> 1.0.0'
+    gem 'piwik_analytics', '~> 1.0.3', :git => https://github.com/zzeroo/piwik_analytics.git
 
-Run the generator:
+Run `bundle install` and after this the generator:
 
     rails g piwik_analytics:install
 
@@ -20,12 +21,12 @@ This will install a piwik.yml configuration file into the `config` directory
 of your application.
 
 
-== Configuration
+## Configuration
 
 Open up `config/piwik.yml` and edit the settings. Each setting is described in
 the config file itself.
 
-== Usage
+## Usage
 
 Inside your `application.html.erb` (or haml, slim) simply add
 
@@ -34,5 +35,5 @@ Inside your `application.html.erb` (or haml, slim) simply add
 Enjoy :)
 
 
-= Licence
-Copyright(c) 2010-2012 Fabian Becker, released under MIT licence.
+# Licence
+Released under MIT licence.
