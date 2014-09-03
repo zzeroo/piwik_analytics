@@ -11,7 +11,7 @@ By default it will output the synchronous piwik tracking code for every page
 
 Add `piwik_analytics` to Gemfile:
 
-    gem 'piwik_analytics', '~> 1.0.3', :git => https://github.com/zzeroo/piwik_analytics.git
+    gem 'piwik_analytics', '~> 1.0.3', :git => 'https://github.com/zzeroo/piwik_analytics.git'
 
 Run `bundle install` and after this the generator:
 
