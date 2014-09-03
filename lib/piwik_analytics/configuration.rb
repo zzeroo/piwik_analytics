@@ -18,6 +18,21 @@ module PiwikAnalytics
       @id_site ||= (user_configuration_from_key('id_site') || 1)
     end
 
+    # When a user clicks to download a file, or clicks on an outbound link, 
+    # Piwik records it. In order to do so, it adds a small delay before the 
+    # user is redirected to the requested file or link. 
+    # The default value is 500ms, but you can set it to a shorter or longer
+    # length of time. 
+    # The time should carefully selectet, too short results in the risk that 
+    # this period of time is not long enough for the data to be recorded in 
+    # Piwik and too long periods results in unwanted delays.
+    # http://developer.piwik.org/api-reference/tracking-javascript
+    # Defaults to false.
+    #
+    def trackingTimer
+      @trackingTimer ||= (user_configuration_from_key('trackingTimer') || false)
+    end
+
     #
     # Whether or not to use the async tracking
     # Defaults to false
@@ -33,21 +48,6 @@ module PiwikAnalytics
     #
     def disabled?
       @disabled ||= (user_configuration_from_key('disabled') || false)
-    end
-
-    # When a user clicks to download a file, or clicks on an outbound link, 
-    # Piwik records it. In order to do so, it adds a small delay before the 
-    # user is redirected to the requested file or link. 
-    # The default value is 500ms, but you can set it to a shorter or longer
-    # length of time. 
-    # The time should carefully selectet, too short results in the risk that 
-    # this period of time is not long enough for the data to be recorded in 
-    # Piwik and too long periods results in unwanted delays.
-    # http://developer.piwik.org/api-reference/tracking-javascript
-    # Defaults to false.
-    #
-    def trackingTimer?
-      @trackingTimer ||= (user_configuration_from_key('trackingTimer') || false)
     end
 
     private

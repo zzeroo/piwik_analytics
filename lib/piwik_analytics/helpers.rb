@@ -4,7 +4,7 @@ module PiwikAnalytics
       config = PiwikAnalytics.configuration
       return if config.disabled?
 
-      if config.trackingTimer?
+      if config.trackingTimer
         if config.use_async?
           trackingTimer = <<-CODE
             _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
