@@ -7,13 +7,11 @@ module PiwikAnalytics
       if config.trackingTimer
         if config.use_async?
           trackingTimer = <<-CODE
-            _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
-            _paq.push(['trackPageView']);
+          _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
           CODE
         else
           trackingTimer = <<-CODE
-            piwikTracker.setLinkTrackingTimer( #{config.trackingTimer} ); // #{config.trackingTimer} milliseconds
-            piwikTracker.trackPageView();
+          piwikTracker.setLinkTrackingTimer( #{config.trackingTimer} ); // #{config.trackingTimer} milliseconds
           CODE
         end
       end
@@ -27,8 +25,8 @@ module PiwikAnalytics
             var u=(("https:" == document.location.protocol) ? "https://#{config.url}/" : "http://#{config.url}/");
             _paq.push(['setSiteId', #{config.id_site}]);
             _paq.push(['setTrackerUrl', u+'piwik.php']);
-            _paq.push(['trackPageView']);
             #{trackingTimer}
+            _paq.push(['trackPageView']);
             var d=document,
                 g=d.createElement('script'),
                 s=d.getElementsByTagName('script')[0];
@@ -51,6 +49,7 @@ module PiwikAnalytics
         </script><script type="text/javascript">
         try {
                 var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #{config.id_site});
+                #{trackingTimer}
                 piwikTracker.trackPageView();
                 piwikTracker.enableLinkTracking();
         } catch( err ) {}
