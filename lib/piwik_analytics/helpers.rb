@@ -20,24 +20,20 @@ module PiwikAnalytics
         tag = <<-CODE
         <!-- Piwik -->
         <script type="text/javascript">
-        var _paq = _paq || [];
-        (function(){
-            var u=(("https:" == document.location.protocol) ? "https://#{config.url}/" : "http://#{config.url}/");
-            _paq.push(['setSiteId', #{config.id_site}]);
-            _paq.push(['setTrackerUrl', u+'piwik.php']);
+          var _paq = _paq || [];
             #{trackingTimer}
-            _paq.push(['trackPageView']);
-            var d=document,
-                g=d.createElement('script'),
-                s=d.getElementsByTagName('script')[0];
-                g.type='text/javascript';
-                g.defer=true;
-                g.async=true;
-                g.src=u+'piwik.js';
-                s.parentNode.insertBefore(g,s);
-        })();
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://#{config.url}/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', #{config.id_site}]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
         </script>
-        <!-- End Piwik Tag -->
+        <noscript><p><img src="http://#{config.url}/piwik.php?idsite=#{config.id_site}" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
         CODE
         tag.html_safe
       else
