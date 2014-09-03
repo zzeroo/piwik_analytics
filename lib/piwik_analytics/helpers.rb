@@ -5,10 +5,17 @@ module PiwikAnalytics
       return if config.disabled?
 
       if config.trackingTimer?
-        trackingTimer = <<-CODE
-        _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
-        _paq.push(['trackPageView']);
-        CODE
+        if config.use_async?
+          trackingTimer = <<-CODE
+            _paq.push(['setLinkTrackingTimer', #{config.trackingTimer}]); // #{config.trackingTimer} milliseconds
+            _paq.push(['trackPageView']);
+          CODE
+        else
+          trackingTimer = <<-CODE
+            piwikTracker.setLinkTrackingTimer( #{config.trackingTimer} ); // #{config.trackingTimer} milliseconds
+            piwikTracker.trackPageView();
+          CODE
+        end
       end
 
       if config.use_async?
